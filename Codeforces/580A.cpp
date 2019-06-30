@@ -1,30 +1,24 @@
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
-    int n;cin>>n;
+    int n;
+    scanf("%d",&n);
     vector<long long>v;
-    for(long long i=0;i<n;i++){
-        long long x;cin>>x;v.push_back(x);
+    for(int i=0;i<n;i++){
+        long long x;cin>>x;
+        v.push_back(x);
     }
-    vector<int>track;
-    int count=1;
-    for(long long i=0;i<n;i++){
-        if(i==n-1){
-            if(v[i]<v[i-1]){
-                continue;
-            }
-            else{
-                track.push_back(count);
-                continue;
-            }
-        }
-        if(v[i]<=v[i+1]){
+    vector<long long>::iterator p=v.begin();
+    int max=-1;
+    while(p!=v.end()){
+        int count=1;
+        while(p!=v.end()-1 && *p <= *(p+1)){
             count++;
+            p++;
         }
-        else{
-            track.push_back(count);
-            count=1;
-        }
+        if(count>max)
+            max=count;
+        p++;
     }
-    cout<<*max_element(track.begin(),track.end());
+    cout<<max;
 }
